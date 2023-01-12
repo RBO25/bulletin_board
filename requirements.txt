@@ -1,0 +1,9 @@
+django
+django-crispy-forms==1.14.0
+django-cleanup==5.2.0
+pillow
+django-ckeditor
+channels
+django-allauth
+python-dotenv
+django-braces
