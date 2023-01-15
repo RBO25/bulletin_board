@@ -71,6 +71,7 @@ INSTALLED_APPS = [
 
     # https://docs.djangoproject.com/en/4.1/ref/contrib/humanize/
     'django.contrib.humanize',
+    'django_extensions',
 
     # packages install
     'allauth',
@@ -257,3 +258,7 @@ MESSAGE_TAGS = {
     messages.WARNING: 'alert-warning',
     messages.ERROR: 'alert-error',
 }
+
+#  в производстве убрать
+# python manage.py shell_plus --notebook
+os.environ['DJANGO_ALLOW_ASYNC_UNSAFE'] = 'true'
