@@ -53,7 +53,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -125,7 +125,6 @@ AUTHENTICATION_BACKENDS = [
 
     # `allauth` specific authentication methods, such as login by e-mail
     'allauth.account.auth_backends.AuthenticationBackend',
-    ...
 ]
 
 
@@ -194,10 +193,10 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static',)
 
 STATICFILES_DIRS = [
-    # os.path.join(BASE_DIR, 'Board/templates')
+    # os.path.join(BASE_DIR, 'template',)
 ]
 
 STATICFILES_FINDERS = [
@@ -262,3 +261,11 @@ MESSAGE_TAGS = {
 #  в производстве убрать
 # python manage.py shell_plus --notebook
 os.environ['DJANGO_ALLOW_ASYNC_UNSAFE'] = 'true'
+
+
+# https://django-ckeditor.readthedocs.io/en/latest/#installation
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Basic',
+    },
+}
