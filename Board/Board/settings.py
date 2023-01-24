@@ -217,10 +217,30 @@ CRISPY_TEMPLATE_PACK = 'uni_form'
 
 # django-ckeditor
 # https://pypi.org/project/django-ckeditor/
+# https://django-ckeditor.readthedocs.io/en/latest/#installation
+
 CKEDITOR_CONFIGS = {
-    'awesome_ckeditor': {
-        'toolbar': 'Basic',
-    },
+         # Когда имя конфигурации по умолчанию, django-ckeditor использует эту конфигурацию по умолчанию
+    'default': {
+                 # Язык
+        'language':'ru-ru',
+                 # Пожалуйста, установите ширину и высоту редактора в соответствии с вашей страницей
+        'width':'730px',
+        'height':'150px',
+        'image_previewText':' ',
+        'tabSpaces': 4,
+        'toolbar': 'Custom',
+                 # Добавить кнопку здесь
+        'toolbar_Custom': [
+            ['Bold', 'Italic', 'Underline', 'Format', 'RemoveFormat'],
+            ['NumberedList', 'BulletedList'],
+            ['Blockquote', 'CodeSnippet'],
+            ['Image', 'Link', 'Unlink'],
+            ['Maximize']
+        ],
+                 # Плагин
+        'extraPlugins': ','.join(['codesnippet','uploadimage','widget','lineutils',]),
+    }
 }
 
 # End django-ckeditor
@@ -265,36 +285,8 @@ MESSAGE_TAGS = {
     messages.ERROR: 'alert-error',
 }
 
-#  в производстве убрать
 # python manage.py shell_plus --notebook
 os.environ['DJANGO_ALLOW_ASYNC_UNSAFE'] = 'true'
-
-
-# https://django-ckeditor.readthedocs.io/en/latest/#installation
-
-CKEDITOR_CONFIGS = {
-         # Когда имя конфигурации по умолчанию, django-ckeditor использует эту конфигурацию по умолчанию
-    'default': {
-                 # Язык
-        'language':'ru-ru',
-                 # Пожалуйста, установите ширину и высоту редактора в соответствии с вашей страницей
-        'width':'730px',
-        'height':'150px',
-        'image_previewText':' ',
-        'tabSpaces': 4,
-        'toolbar': 'Custom',
-                 # Добавить кнопку здесь
-        'toolbar_Custom': [
-            ['Bold', 'Italic', 'Underline', 'Format', 'RemoveFormat'],
-            ['NumberedList', 'BulletedList'],
-            ['Blockquote', 'CodeSnippet'],
-            ['Image', 'Link', 'Unlink'],
-            ['Maximize']
-        ],
-                 # Плагин
-        'extraPlugins': ','.join(['codesnippet','uploadimage','widget','lineutils',]),
-    }
-}
 
 
 LOGIN_URL = 'bulletin/login/'
