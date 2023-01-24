@@ -1,6 +1,3 @@
-# -"- coding: utf-8 -"-
-
-
 # django-debug-toolbar
 INTERNAL_IPS = [
     # ...
@@ -67,6 +64,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.staticfiles',
     'debug_toolbar',
+    'django.contrib.flatpages',
     # 'channels',
 
     # https://docs.djangoproject.com/en/4.1/ref/contrib/humanize/
@@ -96,6 +94,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # django-debug-toolbar
     "debug_toolbar.middleware.DebugToolbarMiddleware",
+    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 ]
 
 ROOT_URLCONF = 'Board.urls'
@@ -240,6 +239,14 @@ CHANNEL_LAYERS = {
 
 
 # email
+DEFAULT_FROM_EMAIL = os.getenv('DEF_FR_EM')
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_VERIFICATION = True
+
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend',
 EMAIL_HOST = 'smtp.gmail.com',
 EMAIL_PORT = os.getenv('EMAIL_PORT'),
@@ -264,8 +271,31 @@ os.environ['DJANGO_ALLOW_ASYNC_UNSAFE'] = 'true'
 
 
 # https://django-ckeditor.readthedocs.io/en/latest/#installation
+
 CKEDITOR_CONFIGS = {
+         # Когда имя конфигурации по умолчанию, django-ckeditor использует эту конфигурацию по умолчанию
     'default': {
-        'toolbar': 'Basic',
-    },
+                 # Язык
+        'language':'ru-ru',
+                 # Пожалуйста, установите ширину и высоту редактора в соответствии с вашей страницей
+        'width':'730px',
+        'height':'150px',
+        'image_previewText':' ',
+        'tabSpaces': 4,
+        'toolbar': 'Custom',
+                 # Добавить кнопку здесь
+        'toolbar_Custom': [
+            ['Bold', 'Italic', 'Underline', 'Format', 'RemoveFormat'],
+            ['NumberedList', 'BulletedList'],
+            ['Blockquote', 'CodeSnippet'],
+            ['Image', 'Link', 'Unlink'],
+            ['Maximize']
+        ],
+                 # Плагин
+        'extraPlugins': ','.join(['codesnippet','uploadimage','widget','lineutils',]),
+    }
 }
+
+
+LOGIN_URL = 'bulletin/login/'
+LOGIN_REDIRECT_URL = '/'
