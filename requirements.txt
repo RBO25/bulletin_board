@@ -13,4 +13,3 @@ django-debug-toolbar
 # https://jupyter.org/install
 notebook
 # pip install django-extensions
-tokens
