@@ -3,7 +3,7 @@ from .models import *
 
 
 class BulletinFilter(FilterSet):
-    header = CharFilter(field_name='header_post', label='Заголовок')
+    header = CharFilter(field_name='header')
     class Meta:
         model = Bulletin
         fields = '__all__'
