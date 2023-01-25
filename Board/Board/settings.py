@@ -79,6 +79,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'ckeditor',
     'bulletin.apps.BulletinConfig',
+    'django_filters',
 ]
 
 

@@ -5,6 +5,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.mail import send_mail, mail_managers
 from .models import *
+from .filters import BulletinFilter
 
 
 class BulletinList(ListView):
@@ -41,6 +42,9 @@ class BulletinDetail(DetailView):
         )
         bulletin.save()
 
+        queryset = super().get_queryset()
+        self.filterset = BulletinFilter(self.request.GET, queryset)
+
 
         send_mail(
             subject=f'{Bulletin.header}',
@@ -49,7 +53,7 @@ class BulletinDetail(DetailView):
             recipient_list=[Bulletin.author]
         )
 
-        return self.get_feedback()
+        return self.filterset.qs()
 
 
 class BulletinCreate(LoginRequiredMixin, CreateView):
